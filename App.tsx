@@ -6,6 +6,7 @@ import Projects from './components/Projects';
 import NowBuilding from './components/NowBuilding';
 import GithubActivity from './components/GithubActivity';
 import AcademicRecords from './components/AcademicRecords';
+import AllProjects from './components/AllProjects';
 import Stamp from './components/Stamp';
 import { SunIcon, MoonIcon } from './components/Icons';
 import { BIO } from './constants';
@@ -13,6 +14,7 @@ import { BIO } from './constants';
 function App() {
   const currentDate = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
   const [darkMode, setDarkMode] = useState(false);
+  const [currentPage, setCurrentPage] = useState<'home' | 'projects'>('home');
 
   // Initialize theme
   useEffect(() => {
@@ -29,6 +31,22 @@ function App() {
       document.documentElement.classList.remove('dark');
     }
   };
+
+  // All Projects Page
+  if (currentPage === 'projects') {
+    return (
+      <div className={`min-h-screen w-full transition-colors duration-300 ${darkMode ? 'bg-paper-dark text-zinc-200 selection:bg-zinc-800' : 'bg-paper text-zinc-800 selection:bg-zinc-300 selection:text-black'}`}>
+        <button 
+          onClick={toggleTheme}
+          className={`fixed top-4 right-4 sm:top-6 sm:right-6 p-2 rounded-full border transition-colors z-20 ${darkMode ? 'border-zinc-800 text-zinc-400 hover:text-white bg-paper-dark' : 'border-zinc-400 text-zinc-600 hover:text-black hover:border-black bg-paper'}`}
+          aria-label="Toggle Theme"
+        >
+          {darkMode ? <SunIcon className="w-4 h-4" /> : <MoonIcon className="w-4 h-4" />}
+        </button>
+        <AllProjects onBack={() => setCurrentPage('home')} />
+      </div>
+    );
+  }
 
   return (
     <div className={`min-h-screen w-full flex justify-center transition-colors duration-300 ${darkMode ? 'bg-paper-dark text-zinc-200 selection:bg-zinc-800' : 'bg-paper text-zinc-800 selection:bg-zinc-300 selection:text-black'}`}>
