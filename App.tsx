@@ -12,7 +12,7 @@ import { BIO } from './constants';
 
 function App() {
   const currentDate = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-  const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
 
   // Initialize theme
   useEffect(() => {
