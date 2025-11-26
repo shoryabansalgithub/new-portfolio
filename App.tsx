@@ -92,7 +92,7 @@ function App() {
              {/* Projects & Activity */}
              <div className="md:col-span-8">
                 <div className={`p-6 sm:p-8 border-b ${darkMode ? 'border-zinc-800' : 'border-zinc-300'}`}>
-                   <Projects />
+                   <Projects onViewAll={() => setCurrentPage('projects')} />
                 </div>
                 <div className="p-6 sm:p-8">
                    <GithubActivity />
