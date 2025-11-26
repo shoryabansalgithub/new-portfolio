@@ -5,8 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>The Dev Chronicles</title>
     <link rel="icon" type="image/png" href="/image.png" />
+    
+    <!-- Preconnect to Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Preload fonts -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=block" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=block" rel="stylesheet">
+    
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <script>
       tailwind.config = {
         darkMode: 'class',
@@ -41,6 +49,14 @@
       }
     </script>
     <style>
+      /* Hide content until fonts are loaded */
+      html {
+        visibility: hidden;
+      }
+      html.fonts-loaded {
+        visibility: visible;
+      }
+      
       /* Custom scrollbar */
       ::-webkit-scrollbar {
         width: 6px;
@@ -89,5 +105,20 @@
     <div id="root"></div>
     <div class="bg-noise"></div>
     <script type="module" src="/index.tsx"></script>
+    <script>
+      // Show content when fonts are loaded
+      if (document.fonts) {
+        document.fonts.ready.then(() => {
+          document.documentElement.classList.add('fonts-loaded');
+        });
+      } else {
+        // Fallback for older browsers
+        document.documentElement.classList.add('fonts-loaded');
+      }
+      // Fallback timeout in case fonts fail to load
+      setTimeout(() => {
+        document.documentElement.classList.add('fonts-loaded');
+      }, 1000);
+    </script>
   </body>
 </html>
