@@ -55,7 +55,7 @@ function App() {
 
           <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 mb-8 px-4 w-full max-w-4xl">
             <h1 className={`text-5xl sm:text-7xl md:text-8xl font-serif font-bold tracking-tighter uppercase scale-y-125 sm:scale-y-110 leading-none ${darkMode ? 'text-zinc-100' : 'text-zinc-900'}`}>
-              {BIO.name}
+              <span>{BIO.firstName}</span><span className="inline-block w-6 sm:w-8"></span><span>{BIO.lastName}</span>
             </h1>
             <div className="animate-fade-in" style={{ animationDelay: '0.8s' }}>
                 <Stamp />

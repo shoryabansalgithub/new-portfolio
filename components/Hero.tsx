@@ -6,7 +6,7 @@ const Hero: React.FC = () => {
     <div className="flex flex-col gap-6 animate-fade-in">
       <div className="flex flex-col sm:flex-row gap-8 items-start">
         <div className="flex-1">
-            <h2 className="text-3xl sm:text-5xl font-serif font-bold leading-[1.1] mb-6 uppercase tracking-tight transition-colors duration-300 text-zinc-900 dark:text-zinc-100">
+            <h2 className="text-3xl sm:text-5xl font-serif font-bold leading-[1.1] mb-6 uppercase tracking-tight transition-colors duration-300 text-zinc-900 dark:text-zinc-100 whitespace-pre-line">
                 {BIO.headline}
             </h2>
              <p className="text-sm sm:text-base leading-relaxed font-sans text-justify transition-colors duration-300 text-zinc-700 dark:text-zinc-400">
@@ -35,17 +35,17 @@ const Hero: React.FC = () => {
                  Fig A. The Developer
              </p>
 
-             <div className="flex flex-col gap-2">
-                <span className="font-mono text-[9px] uppercase transition-colors duration-300 text-zinc-500">Connect</span>
+             <div className="flex flex-col gap-3">
+                <span className="font-mono text-[10px] uppercase transition-colors duration-300 text-zinc-500">Connect</span>
                 {SOCIAL_LINKS.map((link) => (
                   <a 
                     key={link.name} 
                     href={link.url} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-xs font-mono uppercase transition-colors group text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
+                    className="flex items-center gap-2 text-sm font-mono uppercase transition-colors group text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
                   >
-                    <link.icon className="w-3 h-3 transition-transform duration-300 group-hover:-translate-y-1 group-hover:scale-110" />
+                    <link.icon className="w-4 h-4 transition-transform duration-300 group-hover:-translate-y-1 group-hover:scale-110" />
                     <span>{link.name}</span>
                   </a>
                 ))}

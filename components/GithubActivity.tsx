@@ -30,7 +30,7 @@ const GithubActivity: React.FC = () => {
 
   return (
     <section className="mb-16">
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex items-center justify-between mb-6 border-b pb-2 -mx-6 sm:-mx-8 px-6 sm:px-8 transition-colors duration-300 border-zinc-300 dark:border-zinc-800">
         <h3 className="text-xl font-bold transition-colors duration-300 text-zinc-900 dark:text-zinc-100">GitHub Contributions</h3>
         <span className="text-xs text-zinc-500">Last Year</span>
       </div>

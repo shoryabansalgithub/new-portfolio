@@ -23,11 +23,13 @@ export interface ProjectItem {
   link?: string;
   github?: string;
   stars?: number;
+  preview?: string;
 }
 
 export interface TechItem {
   name: string;
   icon?: React.ReactNode;
+  category?: string;
 }
 
 export interface EducationItem {

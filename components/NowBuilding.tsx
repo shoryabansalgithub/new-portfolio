@@ -22,7 +22,7 @@ const NowBuilding: React.FC = () => {
              <h4 className="text-sm font-bold leading-tight mb-1 transition-colors duration-300 text-zinc-900 dark:text-zinc-200">
                 {NOW_BUILDING.title}
              </h4>
-             <p className="text-xs font-serif italic leading-relaxed transition-colors duration-300 text-zinc-600 dark:text-zinc-400">
+             <p className="text-xs font-sans italic leading-relaxed transition-colors duration-300 text-zinc-600 dark:text-zinc-400">
                  {NOW_BUILDING.description}
              </p>
         </div>
