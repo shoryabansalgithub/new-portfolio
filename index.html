@@ -14,6 +14,7 @@
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=block" as="style">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=block" rel="stylesheet">
     
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
         darkMode: 'class',
@@ -47,7 +48,6 @@
         },
       }
     </script>
-    <script src="https://cdn.tailwindcss.com"></script>
     <style>
       /* Hide content until fonts are loaded */
       html {
@@ -79,53 +79,12 @@
       
       /* Smooth theme transition for everything */
       *, *::before, *::after {
-        transition: background-color 0.4s ease, 
-                    border-color 0.4s ease, 
-                    color 0.4s ease,
-                    fill 0.4s ease,
-                    stroke 0.4s ease,
-                    box-shadow 0.4s ease;
-      }
-
-      /* Theme transition overlay */
-      .theme-transition-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        z-index: 9999;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-      }
-      
-      .theme-transition-overlay.active {
-        opacity: 1;
-        animation: themeWipe 0.5s ease-out forwards;
-      }
-      
-      .theme-transition-overlay.to-dark {
-        background: radial-gradient(circle at var(--tx, 95%) var(--ty, 5%), #050505 0%, transparent 70%);
-      }
-      
-      .theme-transition-overlay.to-light {
-        background: radial-gradient(circle at var(--tx, 95%) var(--ty, 5%), #F5F2EA 0%, transparent 70%);
-      }
-      
-      @keyframes themeWipe {
-        0% {
-          opacity: 0;
-          transform: scale(0);
-        }
-        50% {
-          opacity: 0.8;
-          transform: scale(2.5);
-        }
-        100% {
-          opacity: 0;
-          transform: scale(3);
-        }
+        transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+                    border-color 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+                    color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                    fill 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                    stroke 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                    box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1);
       }
 
       /* Noise Texture - Subtle Paper Grain */
