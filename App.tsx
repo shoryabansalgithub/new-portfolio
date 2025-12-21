@@ -4,9 +4,10 @@ import Experience from './components/Experience';
 import TechStack from './components/TechStack';
 import Projects from './components/Projects';
 import NowBuilding from './components/NowBuilding';
-import GithubActivity from './components/GithubActivity';
+import ComponentsPreview from './components/ComponentsPreview';
 import AcademicRecords from './components/AcademicRecords';
 import AllProjects from './components/AllProjects';
+import ComponentShow from './ComponentShow';
 import Stamp from './components/Stamp';
 import { SunIcon, MoonIcon } from './components/Icons';
 import { BIO } from './constants';
@@ -14,7 +15,8 @@ import { BIO } from './constants';
 function App() {
   const currentDate = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
   const [darkMode, setDarkMode] = useState(false);
-  const [currentPage, setCurrentPage] = useState<'home' | 'projects'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'projects' | 'components'>('home');
+  const [isAnimating, setIsAnimating] = useState(false);
 
   // Initialize theme
   useEffect(() => {
@@ -23,14 +25,46 @@ function App() {
   }, []);
 
   const toggleTheme = () => {
-    const newMode = !darkMode;
-    setDarkMode(newMode);
-    if (newMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
+    setIsAnimating(true);
+    
+    // At midpoint (500ms), flip the theme
+    setTimeout(() => {
+      const newMode = !darkMode;
+      setDarkMode(newMode);
+      if (newMode) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    }, 500);
+
+    // Remove animation overlay after complete (1000ms)
+    setTimeout(() => {
+      setIsAnimating(false);
+    }, 1000);
   };
+
+  // Component Showcase Page
+  if (currentPage === 'components') {
+    return (
+      <div className={`min-h-screen w-full transition-colors duration-300 ${darkMode ? 'bg-paper-dark text-zinc-200 selection:bg-zinc-800' : 'bg-paper text-zinc-800 selection:bg-zinc-300 selection:text-black'}`}>
+        <button 
+          onClick={toggleTheme}
+          className={`fixed top-4 right-4 sm:top-6 sm:right-6 p-2 rounded-full border transition-colors z-20 ${darkMode ? 'border-zinc-800 text-zinc-400 hover:text-white bg-paper-dark' : 'border-zinc-400 text-zinc-600 hover:text-black hover:border-black bg-paper'}`}
+          aria-label="Toggle Theme"
+        >
+          {darkMode ? <SunIcon className="w-4 h-4" /> : <MoonIcon className="w-4 h-4" />}
+        </button>
+        <button 
+          onClick={() => setCurrentPage('home')}
+          className={`fixed top-4 left-4 sm:top-6 sm:left-6 px-4 py-2 rounded-lg border transition-colors z-20 ${darkMode ? 'border-zinc-800 text-zinc-400 hover:text-white bg-paper-dark' : 'border-zinc-400 text-zinc-600 hover:text-black hover:border-black bg-paper'}`}
+        >
+          ← Back
+        </button>
+        <ComponentShow />
+      </div>
+    );
+  }
 
   // All Projects Page
   if (currentPage === 'projects') {
@@ -50,6 +84,23 @@ function App() {
 
   return (
     <div className={`min-h-screen w-full flex justify-center transition-colors duration-300 ${darkMode ? 'bg-paper-dark text-zinc-200 selection:bg-zinc-800' : 'bg-paper text-zinc-800 selection:bg-zinc-300 selection:text-black'}`}>
+      
+      {/* Portal Animation Overlay */}
+      {isAnimating && (
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black">
+          <div className="relative w-full h-full flex items-center justify-center">
+            {/* Zooming circle animation */}
+            <div 
+              className="absolute rounded-full bg-gradient-radial from-white via-zinc-300 to-black animate-portal-zoom"
+              style={{
+                width: '100px',
+                height: '100px',
+                animation: 'portalZoom 1s cubic-bezier(0.4, 0.0, 0.2, 1) forwards'
+              }}
+            />
+          </div>
+        </div>
+      )}
       
       <div className={`w-full max-w-[900px] border-x min-h-screen relative z-10 flex flex-col transition-colors duration-300 ${darkMode ? 'border-zinc-800 bg-paper-dark' : 'border-zinc-300 bg-paper'}`}>
         
@@ -113,7 +164,7 @@ function App() {
                    <Projects onViewAll={() => setCurrentPage('projects')} />
                 </div>
                 <div className="p-6 sm:p-8">
-                   <GithubActivity />
+                   <ComponentsPreview onNavigate={() => setCurrentPage('components')} />
                 </div>
              </div>
              

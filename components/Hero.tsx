@@ -9,7 +9,7 @@ const Hero: React.FC = () => {
             <h2 className="text-3xl sm:text-5xl font-serif font-bold leading-[1.1] mb-6 uppercase tracking-tight transition-colors duration-300 text-zinc-900 dark:text-zinc-100 whitespace-pre-line">
                 {BIO.headline}
             </h2>
-             <p className="text-sm sm:text-base leading-relaxed font-sans text-justify transition-colors duration-300 text-zinc-700 dark:text-zinc-400">
+             <p className="text-sm sm:text-base font-sans leading-relaxed text-justify transition-colors duration-300 text-zinc-700 dark:text-zinc-400">
                 {BIO.description}
             </p>
             

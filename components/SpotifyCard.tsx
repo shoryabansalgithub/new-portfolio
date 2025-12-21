@@ -12,8 +12,8 @@ const SpotifyCard: React.FC = () => {
         <div className="flex flex-col justify-between h-12 py-0.5">
              <span className="font-mono text-[9px] uppercase tracking-widest text-zinc-500">On Air Now</span>
              <div className="leading-tight">
-                 <div className="text-xs font-bold truncate max-w-[120px] transition-colors duration-300 text-zinc-900 dark:text-zinc-200">{NOW_PLAYING.song}</div>
-                 <div className="text-[10px] font-serif italic truncate max-w-[120px] transition-colors duration-300 text-zinc-600 dark:text-zinc-400">{NOW_PLAYING.artist}</div>
+                 <div className="text-xs font-sans font-bold truncate max-w-[120px] transition-colors duration-300 text-zinc-900 dark:text-zinc-200">{NOW_PLAYING.song}</div>
+                 <div className="text-[10px] font-sans italic truncate max-w-[120px] transition-colors duration-300 text-zinc-600 dark:text-zinc-400">{NOW_PLAYING.artist}</div>
              </div>
         </div>
     </div>

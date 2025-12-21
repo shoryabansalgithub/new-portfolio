@@ -38,7 +38,7 @@ const Projects: React.FC<ProjectsProps> = ({ onViewAll }) => {
       
       <section className="animate-fade-in" style={{ animationDelay: '0.4s' }}>
         <div className="flex items-baseline justify-between mb-6 border-b pb-2 -mx-6 sm:-mx-8 px-6 sm:px-8 transition-colors duration-300 border-zinc-300 dark:border-zinc-800">
-           <h3 className="font-serif text-2xl italic transition-colors duration-300 text-zinc-900 dark:text-zinc-100">Featured Works</h3>
+           <h3 className="font-serif font-bold text-2xl transition-colors duration-300 text-zinc-900 dark:text-zinc-100">Featured Works</h3>
            <button 
              onClick={onViewAll}
              className="group flex items-center gap-1 font-mono text-[10px] uppercase text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors"

@@ -4,7 +4,7 @@ import { EDUCATION } from '../constants';
 const AcademicRecords: React.FC = () => {
   return (
     <section className="animate-fade-in -mt-[4px]" style={{ animationDelay: '0.5s' }}>
-      <h3 className="font-serif text-lg mb-[24.5px] border-b pb-2 px-6 transition-colors duration-300 text-zinc-900 border-zinc-300 dark:text-zinc-100 dark:border-zinc-800">Education</h3>
+      <h3 className="font-serif font-bold text-2xl mb-[24.5px] border-b pb-[16px] px-6 transition-colors duration-300 text-zinc-900 border-zinc-300 dark:text-zinc-100 dark:border-zinc-800">Education</h3>
       
       <div className="flex flex-col gap-6 px-6">
           {EDUCATION.map((edu, idx) => (
@@ -16,7 +16,7 @@ const AcademicRecords: React.FC = () => {
                      <span className="font-mono text-[9px] text-zinc-500">{edu.period}</span>
                 </div>
 
-                <div className="text-xs font-serif italic mb-2 transition-colors duration-300 text-zinc-600 dark:text-zinc-400">
+                <div className="text-xs font-sans italic mb-2 transition-colors duration-300 text-zinc-600 dark:text-zinc-400">
                     {edu.degree}
                 </div>
                 

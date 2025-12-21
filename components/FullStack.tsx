@@ -34,7 +34,7 @@ export const FullStack: React.FC<FullStackProps> = ({ onBack }) => {
           <h1 className="font-serif text-4xl sm:text-5xl font-bold tracking-tight">
             Full Tech Stack
           </h1>
-          <p className="font-sans text-lg mt-2 text-zinc-600 dark:text-zinc-400">
+          <p className="text-base font-sans leading-relaxed mt-2 text-zinc-600 dark:text-zinc-400">
             Technologies & tools I work with
           </p>
         </div>

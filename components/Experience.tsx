@@ -4,7 +4,7 @@ import { EXPERIENCE } from '../constants';
 const Experience: React.FC = () => {
   return (
     <section className="animate-fade-in" style={{ animationDelay: '0.2s' }}>
-      <h3 className="font-serif text-xl mb-8 border-b pb-[12px] px-6 transition-colors duration-300 text-zinc-900 border-zinc-300 dark:text-zinc-100 dark:border-zinc-800">Professional Experience</h3>
+      <h3 className="font-serif font-bold text-2xl mb-8 border-b pb-[8px] px-6 transition-colors duration-300 text-zinc-900 border-zinc-300 dark:text-zinc-100 dark:border-zinc-800">Professional Experience</h3>
       <div className="flex flex-col gap-8 px-6">
         {EXPERIENCE.map((job, index) => (
           <div key={index} className="group relative">
@@ -24,14 +24,11 @@ const Experience: React.FC = () => {
                 {job.role}
             </div>
             
-            <p className="text-xs font-sans leading-relaxed transition-colors mb-3 text-zinc-600 dark:text-zinc-500">
+            <p className="text-sm font-sans leading-relaxed transition-colors mb-3 text-zinc-600 dark:text-zinc-500">
               {job.description}
             </p>
           </div>
         ))}
-      </div>
-      <div className="mt-4 pt-4 border-t text-center transition-colors duration-300 border-zinc-300 dark:border-zinc-800">
-          <span className="font-mono text-[9px] uppercase text-zinc-400 dark:text-zinc-600">*** End of Section ***</span>
       </div>
     </section>
   );

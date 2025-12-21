@@ -23,7 +23,7 @@ const AllProjects: React.FC<AllProjectsProps> = ({ onBack }) => {
           <h1 className="font-serif text-4xl sm:text-5xl font-bold mb-4 transition-colors duration-300 text-zinc-900 dark:text-zinc-100">
             All Projects
           </h1>
-          <p className="text-lg font-sans transition-colors duration-300 text-zinc-600 dark:text-zinc-400">
+          <p className="text-base font-sans leading-relaxed transition-colors duration-300 text-zinc-600 dark:text-zinc-400">
             A collection of projects I've worked on, from web apps to browser extensions.
           </p>
         </div>
