@@ -26,7 +26,7 @@ function App() {
 
   const toggleTheme = () => {
     setIsAnimating(true);
-    
+
     // At midpoint (500ms), flip the theme
     setTimeout(() => {
       const newMode = !darkMode;
@@ -48,14 +48,14 @@ function App() {
   if (currentPage === 'components') {
     return (
       <div className={`min-h-screen w-full transition-colors duration-300 ${darkMode ? 'bg-paper-dark text-zinc-200 selection:bg-zinc-800' : 'bg-paper text-zinc-800 selection:bg-zinc-300 selection:text-black'}`}>
-        <button 
+        <button
           onClick={toggleTheme}
           className={`fixed top-4 right-4 sm:top-6 sm:right-6 p-2 rounded-full border transition-colors z-20 ${darkMode ? 'border-zinc-800 text-zinc-400 hover:text-white bg-paper-dark' : 'border-zinc-400 text-zinc-600 hover:text-black hover:border-black bg-paper'}`}
           aria-label="Toggle Theme"
         >
           {darkMode ? <SunIcon className="w-4 h-4" /> : <MoonIcon className="w-4 h-4" />}
         </button>
-        <button 
+        <button
           onClick={() => setCurrentPage('home')}
           className={`fixed top-4 left-4 sm:top-6 sm:left-6 px-4 py-2 rounded-lg border transition-colors z-20 ${darkMode ? 'border-zinc-800 text-zinc-400 hover:text-white bg-paper-dark' : 'border-zinc-400 text-zinc-600 hover:text-black hover:border-black bg-paper'}`}
         >
@@ -70,7 +70,7 @@ function App() {
   if (currentPage === 'projects') {
     return (
       <div className={`min-h-screen w-full transition-colors duration-300 ${darkMode ? 'bg-paper-dark text-zinc-200 selection:bg-zinc-800' : 'bg-paper text-zinc-800 selection:bg-zinc-300 selection:text-black'}`}>
-        <button 
+        <button
           onClick={toggleTheme}
           className={`fixed top-4 right-4 sm:top-6 sm:right-6 p-2 rounded-full border transition-colors z-20 ${darkMode ? 'border-zinc-800 text-zinc-400 hover:text-white bg-paper-dark' : 'border-zinc-400 text-zinc-600 hover:text-black hover:border-black bg-paper'}`}
           aria-label="Toggle Theme"
@@ -84,13 +84,13 @@ function App() {
 
   return (
     <div className={`min-h-screen w-full flex justify-center transition-colors duration-300 ${darkMode ? 'bg-paper-dark text-zinc-200 selection:bg-zinc-800' : 'bg-paper text-zinc-800 selection:bg-zinc-300 selection:text-black'}`}>
-      
+
       {/* Portal Animation Overlay */}
       {isAnimating && (
         <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black">
           <div className="relative w-full h-full flex items-center justify-center">
             {/* Zooming circle animation */}
-            <div 
+            <div
               className="absolute rounded-full bg-gradient-radial from-white via-zinc-300 to-black animate-portal-zoom"
               style={{
                 width: '100px',
@@ -101,13 +101,13 @@ function App() {
           </div>
         </div>
       )}
-      
+
       <div className={`w-full max-w-[900px] border-x min-h-screen relative z-10 flex flex-col transition-colors duration-300 ${darkMode ? 'border-zinc-800 bg-paper-dark' : 'border-zinc-300 bg-paper'}`}>
-        
+
         {/* MASTHEAD */}
-        <header className={`pt-16 pb-0 flex flex-col items-center gap-4 text-center relative border-b-2 ${darkMode ? 'border-zinc-800' : 'border-zinc-800'}`}>
-          
-          <button 
+        <header className={`pt-12 sm:pt-16 pb-0 flex flex-col items-center gap-4 text-center relative border-b-2 ${darkMode ? 'border-zinc-800' : 'border-zinc-800'}`}>
+
+          <button
             onClick={toggleTheme}
             className={`absolute top-4 right-4 sm:top-6 sm:right-6 p-2 rounded-full border transition-colors z-20 ${darkMode ? 'border-zinc-800 text-zinc-400 hover:text-white' : 'border-zinc-400 text-zinc-600 hover:text-black hover:border-black'}`}
             aria-label="Toggle Theme"
@@ -116,10 +116,10 @@ function App() {
           </button>
 
           {/* Vol / Date Bar - Full Width Border */}
-          <div className={`w-full border-b pb-2 mb-2 px-6 sm:px-8 flex justify-between items-center text-[9px] sm:text-[10px] font-mono uppercase tracking-widest ${darkMode ? 'text-zinc-500 border-zinc-800' : 'text-zinc-600 border-zinc-400'}`}>
-             <span>Vol. 01</span>
-             <span className="hidden sm:inline">{darkMode ? 'Dark Edition' : 'Print Edition'}</span>
-             <span>{currentDate}</span>
+          <div className={`w-full border-b pb-2 mb-2 px-4 sm:px-8 flex justify-between items-center text-[9px] sm:text-[10px] font-mono uppercase tracking-widest ${darkMode ? 'text-zinc-500 border-zinc-800' : 'text-zinc-600 border-zinc-400'}`}>
+            <span>Vol. 01</span>
+            <span className="hidden sm:inline">{darkMode ? 'Dark Edition' : 'Print Edition'}</span>
+            <span>{currentDate}</span>
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 mb-8 px-4 w-full max-w-4xl">
@@ -127,56 +127,56 @@ function App() {
               <span>{BIO.firstName}</span><span className="inline-block w-6 sm:w-8"></span><span>{BIO.lastName}</span>
             </h1>
             <div className="animate-fade-in" style={{ animationDelay: '0.8s' }}>
-                <Stamp />
+              <Stamp />
             </div>
           </div>
         </header>
 
         {/* MAIN LAYOUT - SPLIT INTO ROWS FOR ALIGNMENT */}
         <div className="flex flex-col">
-          
+
           {/* ROW 1: Intro & Sidebar Top */}
           <div className={`flex flex-col md:grid md:grid-cols-12 border-b ${darkMode ? 'border-zinc-800' : 'border-zinc-300'}`}>
-             {/* Hero Section */}
-             <div className="md:col-span-8 p-6 sm:p-8">
-                <Hero />
-             </div>
-             
-             {/* Sidebar Top */}
-             <div className={`md:col-span-4 border-t md:border-t-0 md:border-l-2 md:border-dotted flex flex-col ${darkMode ? 'border-zinc-800 bg-zinc-900/10' : 'border-zinc-300 bg-transparent'}`}>
-                <div className={`p-6 border-b ${darkMode ? 'border-zinc-800' : 'border-zinc-300'}`}>
-                    <h3 className={`font-mono text-xs uppercase tracking-wider mb-4 ${darkMode ? 'text-zinc-500' : 'text-zinc-500'}`}>Now Building</h3>
-                    <NowBuilding />
-                </div>
+            {/* Hero Section */}
+            <div className="md:col-span-8 p-4 sm:p-8">
+              <Hero />
+            </div>
 
-                <div className="py-6 h-full">
-                   <TechStack />
-                </div>
-             </div>
+            {/* Sidebar Top */}
+            <div className={`md:col-span-4 border-t md:border-t-0 md:border-l-2 md:border-dotted flex flex-col ${darkMode ? 'border-zinc-800 bg-zinc-900/10' : 'border-zinc-300 bg-transparent'}`}>
+              <div className={`p-4 sm:p-6 border-b ${darkMode ? 'border-zinc-800' : 'border-zinc-300'}`}>
+                <h3 className={`font-mono text-xs uppercase tracking-wider mb-4 ${darkMode ? 'text-zinc-500' : 'text-zinc-500'}`}>Now Building</h3>
+                <NowBuilding />
+              </div>
+
+              <div className="py-6 h-full">
+                <TechStack />
+              </div>
+            </div>
           </div>
 
           {/* ROW 2: Projects & Sidebar Bottom - ALIGNED START */}
           <div className="flex flex-col md:grid md:grid-cols-12">
-             
-             {/* Projects & Activity */}
-             <div className="md:col-span-8">
-                <div className={`p-6 sm:p-8 border-b ${darkMode ? 'border-zinc-800' : 'border-zinc-300'}`}>
-                   <Projects onViewAll={() => setCurrentPage('projects')} />
-                </div>
-                <div className="p-6 sm:p-8">
-                   <ComponentsPreview onNavigate={() => setCurrentPage('components')} />
-                </div>
-             </div>
-             
-             {/* Sidebar Bottom */}
-             <div className={`md:col-span-4 border-t md:border-t-0 md:border-l-2 md:border-dotted flex flex-col ${darkMode ? 'border-zinc-800 bg-zinc-900/10' : 'border-zinc-300 bg-transparent'}`}>
-                 <div className={`py-6 sm:py-8 border-b ${darkMode ? 'border-zinc-800' : 'border-zinc-300'}`}>
-                    <Experience />
-                 </div>
-                 <div className="py-6 sm:py-8">
-                    <AcademicRecords />
-                 </div>
-             </div>
+
+            {/* Projects & Activity */}
+            <div className="md:col-span-8">
+              <div className={`p-4 sm:p-8 border-b ${darkMode ? 'border-zinc-800' : 'border-zinc-300'}`}>
+                <Projects onViewAll={() => setCurrentPage('projects')} />
+              </div>
+              <div className="p-4 sm:p-8">
+                <ComponentsPreview onNavigate={() => setCurrentPage('components')} />
+              </div>
+            </div>
+
+            {/* Sidebar Bottom */}
+            <div className={`md:col-span-4 border-t md:border-t-0 md:border-l-2 md:border-dotted flex flex-col ${darkMode ? 'border-zinc-800 bg-zinc-900/10' : 'border-zinc-300 bg-transparent'}`}>
+              <div className={`py-6 sm:py-8 border-b ${darkMode ? 'border-zinc-800' : 'border-zinc-300'}`}>
+                <Experience />
+              </div>
+              <div className="py-6 sm:py-8">
+                <AcademicRecords />
+              </div>
+            </div>
 
           </div>
 
@@ -184,13 +184,13 @@ function App() {
 
         {/* FOOTER */}
         <footer className={`border-t-2 p-8 text-center flex flex-col items-center gap-2 ${darkMode ? 'border-zinc-800' : 'border-zinc-800'}`}>
-             <div className={`font-serif italic text-2xl ${darkMode ? 'text-zinc-600' : 'text-zinc-400'}`}>The End &bull; Vol. 01</div>
-            <p className={`font-mono text-[9px] uppercase ${darkMode ? 'text-zinc-700' : 'text-zinc-500'}`}>
-                Printed in the digital realm | Made with &hearts; by {BIO.name.split(' ')[0]}
-            </p>
-            <p className={`font-mono text-[9px] uppercase mt-2 ${darkMode ? 'text-zinc-800' : 'text-zinc-400'}`}>
-                &copy; 2025 All Rights Reserved
-            </p>
+          <div className={`font-serif italic text-2xl ${darkMode ? 'text-zinc-600' : 'text-zinc-400'}`}>The End &bull; Vol. 01</div>
+          <p className={`font-mono text-[9px] uppercase ${darkMode ? 'text-zinc-700' : 'text-zinc-500'}`}>
+            Printed in the digital realm | Made with &hearts; by {BIO.name.split(' ')[0]}
+          </p>
+          <p className={`font-mono text-[9px] uppercase mt-2 ${darkMode ? 'text-zinc-800' : 'text-zinc-400'}`}>
+            &copy; 2025 All Rights Reserved
+          </p>
         </footer>
 
       </div>

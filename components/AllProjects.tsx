@@ -9,17 +9,17 @@ interface AllProjectsProps {
 const AllProjects: React.FC<AllProjectsProps> = ({ onBack }) => {
   return (
     <>
-      <div className="min-h-screen py-12 px-6 sm:px-8">
+      <div className="min-h-screen py-12 px-4 sm:px-8">
         {/* Header */}
         <div className="max-w-4xl mx-auto mb-12">
-          <button 
+          <button
             onClick={onBack}
             className="flex items-center gap-2 text-sm font-mono uppercase mb-8 transition-colors text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100"
           >
             <ArrowUpRight className="w-4 h-4 rotate-[225deg]" />
             Back to Home
           </button>
-          
+
           <h1 className="font-serif text-4xl sm:text-5xl font-bold mb-4 transition-colors duration-300 text-zinc-900 dark:text-zinc-100">
             All Projects
           </h1>
@@ -32,15 +32,15 @@ const AllProjects: React.FC<AllProjectsProps> = ({ onBack }) => {
         <div className="max-w-4xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {PROJECTS.map((project, index) => (
-              <article 
-                key={index} 
+              <article
+                key={index}
                 className="group p-6 border rounded-lg transition-all duration-300 cursor-pointer border-zinc-300 hover:border-zinc-400 bg-white/50 dark:border-zinc-800 dark:hover:border-zinc-700 dark:bg-zinc-900/30"
               >
                 {/* Project Preview */}
                 {project.preview && (
                   <div className="w-full h-64 mb-4 rounded-md overflow-hidden border border-zinc-200 dark:border-zinc-800">
-                    <img 
-                      src={project.preview} 
+                    <img
+                      src={project.preview}
                       alt={project.title}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
@@ -52,11 +52,11 @@ const AllProjects: React.FC<AllProjectsProps> = ({ onBack }) => {
                     {project.title}
                   </h2>
                 </div>
-                
+
                 <p className="text-sm font-sans leading-relaxed mb-4 transition-colors duration-300 text-zinc-600 dark:text-zinc-400">
                   {project.description}
                 </p>
-                
+
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.tags.map(tag => (
                     <span key={tag} className="font-mono text-[10px] uppercase px-2 py-1 rounded transition-colors duration-300 bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400">
@@ -67,8 +67,8 @@ const AllProjects: React.FC<AllProjectsProps> = ({ onBack }) => {
 
                 <div className="flex gap-4 pt-4 border-t transition-colors duration-300 border-zinc-200 dark:border-zinc-800">
                   {project.link && (
-                    <a 
-                      href={project.link} 
+                    <a
+                      href={project.link}
                       className="flex items-center gap-1 text-xs font-mono uppercase transition-colors text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
                       onClick={(e) => e.stopPropagation()}
                     >
@@ -76,8 +76,8 @@ const AllProjects: React.FC<AllProjectsProps> = ({ onBack }) => {
                     </a>
                   )}
                   {project.github && (
-                    <a 
-                      href={project.github} 
+                    <a
+                      href={project.github}
                       className="flex items-center gap-1 text-xs font-mono uppercase transition-colors text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
                       onClick={(e) => e.stopPropagation()}
                     >
