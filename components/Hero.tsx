@@ -45,18 +45,41 @@ const Hero: React.FC = () => {
     };
   }, [animate]);
 
-  const handleMouseMove = useCallback((e: React.MouseEvent) => {
+  const updatePosition = useCallback((clientX: number, clientY: number) => {
     if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
-    mousePosRef.current.x = e.clientX - rect.left;
-    mousePosRef.current.y = e.clientY - rect.top;
+    mousePosRef.current.x = clientX - rect.left;
+    mousePosRef.current.y = clientY - rect.top;
   }, []);
+
+  // Mouse events
+  const handleMouseMove = useCallback((e: React.MouseEvent) => {
+    updatePosition(e.clientX, e.clientY);
+  }, [updatePosition]);
 
   const handleMouseEnter = useCallback(() => {
     isHoveringRef.current = true;
   }, []);
 
   const handleMouseLeave = useCallback(() => {
+    isHoveringRef.current = false;
+  }, []);
+
+  // Touch events for mobile
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    if (e.touches.length > 0) {
+      isHoveringRef.current = true;
+      updatePosition(e.touches[0].clientX, e.touches[0].clientY);
+    }
+  }, [updatePosition]);
+
+  const handleTouchMove = useCallback((e: React.TouchEvent) => {
+    if (e.touches.length > 0) {
+      updatePosition(e.touches[0].clientX, e.touches[0].clientY);
+    }
+  }, [updatePosition]);
+
+  const handleTouchEnd = useCallback(() => {
     isHoveringRef.current = false;
   }, []);
 
@@ -84,10 +107,13 @@ const Hero: React.FC = () => {
         <div className="w-full sm:w-48 shrink-0 flex flex-col gap-4">
           <div
             ref={containerRef}
-            className="relative border p-1 border-zinc-400 bg-white dark:border-zinc-800 dark:bg-zinc-900/50 overflow-hidden cursor-none"
+            className="relative border p-1 border-zinc-400 bg-white dark:border-zinc-800 dark:bg-zinc-900/50 overflow-hidden cursor-none touch-none"
             onMouseMove={handleMouseMove}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
           >
             {/* Image wrapper */}
             <div className="relative w-full aspect-square overflow-hidden">
