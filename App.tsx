@@ -117,7 +117,7 @@ function App() {
 
           {/* Vol / Date Bar - Full Width Border */}
           <div className={`w-full border-b pb-2 mb-2 px-4 sm:px-8 flex justify-between items-center text-[9px] sm:text-[10px] font-mono uppercase tracking-widest ${darkMode ? 'text-zinc-500 border-zinc-800' : 'text-zinc-600 border-zinc-400'}`}>
-            <span>Vol. 01</span>
+            <span>Jaipur, India</span>
             <span className="hidden sm:inline">{darkMode ? 'Dark Edition' : 'Print Edition'}</span>
             <span>{currentDate}</span>
           </div>

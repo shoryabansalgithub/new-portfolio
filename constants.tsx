@@ -1,8 +1,8 @@
 import React from 'react';
-import { 
-  GitHubIcon, 
-  TwitterIcon, 
-  LinkedInIcon, 
+import {
+  GitHubIcon,
+  TwitterIcon,
+  LinkedInIcon,
   MailIcon,
   ReactLogo,
   TypescriptLogo,
@@ -28,7 +28,7 @@ export const BIO = {
   firstName: "Shorya",
   lastName: "Bansal",
   title: "Full Stack Developer",
-  headline: "meet your\nnew favourite developer",
+  headline: "meet your\nnew favourite frontend developer",
   description: "I build interactive web apps using React, Next.js, and TypeScript. With a focus on UI design and performance, I aim to create digital experiences that feel as timeless as print.",
   avatar: "/image.png"
 };
@@ -140,6 +140,6 @@ export const NOW_BUILDING = {
 export const NOW_PLAYING = {
   song: "Lo-Fi Beats",
   artist: "Spotify",
-  cover: "https://picsum.photos/id/10/200/200", 
+  cover: "https://picsum.photos/id/10/200/200",
   link: "#"
 };
