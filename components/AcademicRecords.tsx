@@ -3,8 +3,8 @@ import { EDUCATION } from '../constants';
 
 const AcademicRecords: React.FC = () => {
   return (
-    <section className="animate-fade-in -mt-[4px]" style={{ animationDelay: '0.5s' }}>
-      <h3 className="font-serif font-bold text-2xl mb-[24.5px] border-b pb-[16px] px-4 sm:px-6 transition-colors duration-300 text-zinc-900 border-zinc-300 dark:text-zinc-100 dark:border-zinc-800">Education</h3>
+    <section className="animate-fade-in" style={{ animationDelay: '0.5s' }}>
+      <h3 className="font-serif font-bold text-2xl mb-[24.5px] border-b pb-2 px-4 sm:px-6 transition-colors duration-300 text-zinc-900 border-zinc-300 dark:text-zinc-100 dark:border-zinc-800">Education</h3>
 
       <div className="flex flex-col gap-6 px-4 sm:px-6">
         {EDUCATION.map((edu, idx) => (
