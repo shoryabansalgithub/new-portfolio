@@ -27,7 +27,7 @@ function App() {
   const toggleTheme = () => {
     setIsAnimating(true);
 
-    // At midpoint (500ms), flip the theme
+    // Quick fade - flip theme at 200ms
     setTimeout(() => {
       const newMode = !darkMode;
       setDarkMode(newMode);
@@ -36,12 +36,12 @@ function App() {
       } else {
         document.documentElement.classList.remove('dark');
       }
-    }, 500);
+    }, 200);
 
-    // Remove animation overlay after complete (1000ms)
+    // Remove animation overlay after 400ms total
     setTimeout(() => {
       setIsAnimating(false);
-    }, 1000);
+    }, 400);
   };
 
   // Component Showcase Page
@@ -85,22 +85,16 @@ function App() {
   return (
     <div className={`min-h-screen w-full flex justify-center transition-colors duration-300 ${darkMode ? 'bg-paper-dark text-zinc-200 selection:bg-zinc-800' : 'bg-paper text-zinc-800 selection:bg-zinc-300 selection:text-black'}`}>
 
-      {/* Portal Animation Overlay */}
-      {isAnimating && (
-        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black">
-          <div className="relative w-full h-full flex items-center justify-center">
-            {/* Zooming circle animation */}
-            <div
-              className="absolute rounded-full bg-gradient-radial from-white via-zinc-300 to-black animate-portal-zoom"
-              style={{
-                width: '100px',
-                height: '100px',
-                animation: 'portalZoom 1s cubic-bezier(0.4, 0.0, 0.2, 1) forwards'
-              }}
-            />
-          </div>
-        </div>
-      )}
+      {/* Smooth Theme Transition Overlay */}
+      <div
+        className={`fixed inset-0 z-[9999] pointer-events-none transition-opacity duration-200 ease-out ${isAnimating ? 'opacity-100' : 'opacity-0'
+          }`}
+        style={{
+          background: darkMode
+            ? 'radial-gradient(circle at center, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.6) 100%)'
+            : 'radial-gradient(circle at center, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.8) 100%)',
+        }}
+      />
 
       <div className={`w-full max-w-[900px] border-x min-h-screen relative z-10 flex flex-col transition-colors duration-300 ${darkMode ? 'border-zinc-800 bg-paper-dark' : 'border-zinc-300 bg-paper'}`}>
 
@@ -155,24 +149,37 @@ function App() {
             </div>
           </div>
 
-          {/* ROW 2: Projects & Sidebar Bottom - ALIGNED START */}
-          <div className="flex flex-col md:grid md:grid-cols-12">
+          {/* ROW 2: Projects & Experience */}
+          <div className={`flex flex-col md:grid md:grid-cols-12 border-b ${darkMode ? 'border-zinc-800' : 'border-zinc-300'}`}>
 
-            {/* Projects & Activity */}
+            {/* Projects */}
             <div className="md:col-span-8">
-              <div className={`p-4 sm:p-8 border-b ${darkMode ? 'border-zinc-800' : 'border-zinc-300'}`}>
+              <div className="p-4 sm:p-8">
                 <Projects onViewAll={() => setCurrentPage('projects')} />
               </div>
+            </div>
+
+            {/* Experience */}
+            <div className={`md:col-span-4 border-t md:border-t-0 md:border-l-2 md:border-dotted ${darkMode ? 'border-zinc-800 bg-zinc-900/10' : 'border-zinc-300 bg-transparent'}`}>
+              <div className="py-6 sm:py-8">
+                <Experience />
+              </div>
+            </div>
+
+          </div>
+
+          {/* ROW 3: Components & Education - ALIGNED */}
+          <div className="flex flex-col md:grid md:grid-cols-12">
+
+            {/* Components Preview */}
+            <div className="md:col-span-8">
               <div className="p-4 sm:p-8">
                 <ComponentsPreview onNavigate={() => setCurrentPage('components')} />
               </div>
             </div>
 
-            {/* Sidebar Bottom */}
-            <div className={`md:col-span-4 border-t md:border-t-0 md:border-l-2 md:border-dotted flex flex-col ${darkMode ? 'border-zinc-800 bg-zinc-900/10' : 'border-zinc-300 bg-transparent'}`}>
-              <div className={`py-6 sm:py-8 border-b ${darkMode ? 'border-zinc-800' : 'border-zinc-300'}`}>
-                <Experience />
-              </div>
+            {/* Education */}
+            <div className={`md:col-span-4 border-t md:border-t-0 md:border-l-2 md:border-dotted ${darkMode ? 'border-zinc-800 bg-zinc-900/10' : 'border-zinc-300 bg-transparent'}`}>
               <div className="py-6 sm:py-8">
                 <AcademicRecords />
               </div>
