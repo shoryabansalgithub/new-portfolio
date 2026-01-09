@@ -1,87 +1,27 @@
-import React, { useRef, useEffect, useCallback } from 'react';
+import React, { useRef, useState, useCallback } from 'react';
 import { BIO, SOCIAL_LINKS } from '../constants';
 
 const Hero: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const overlayRef = useRef<HTMLImageElement>(null);
-  const cursorRef = useRef<HTMLDivElement>(null);
-  const blobPosRef = useRef({ x: 0, y: 0 });
-  const mousePosRef = useRef({ x: 0, y: 0 });
-  const isHoveringRef = useRef(false);
-  const animationFrameRef = useRef<number>();
+  const [showSecondImage, setShowSecondImage] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
 
-  const BLOB_SIZE = 80;
-  const LAG_FACTOR = 0.15;
+  // Handle click to toggle between images with smooth erase effect
+  const handleClick = useCallback(() => {
+    if (isAnimating) return;
 
-  const animate = useCallback(() => {
-    // Smooth interpolation
-    blobPosRef.current.x += (mousePosRef.current.x - blobPosRef.current.x) * LAG_FACTOR;
-    blobPosRef.current.y += (mousePosRef.current.y - blobPosRef.current.y) * LAG_FACTOR;
+    setIsAnimating(true);
 
-    // Update DOM directly without React re-render
-    if (overlayRef.current) {
-      const x = blobPosRef.current.x - 4;
-      const y = blobPosRef.current.y - 4;
-      overlayRef.current.style.clipPath = isHoveringRef.current
-        ? `circle(${BLOB_SIZE / 2}px at ${x}px ${y}px)`
-        : 'circle(0px at 50% 50%)';
-    }
+    // Toggle after a brief delay for the animation to start
+    setTimeout(() => {
+      setShowSecondImage(prev => !prev);
+    }, 150);
 
-    if (cursorRef.current) {
-      cursorRef.current.style.left = `${blobPosRef.current.x - 8}px`;
-      cursorRef.current.style.top = `${blobPosRef.current.y - 8}px`;
-      cursorRef.current.style.opacity = isHoveringRef.current ? '1' : '0';
-    }
-
-    animationFrameRef.current = requestAnimationFrame(animate);
-  }, []);
-
-  useEffect(() => {
-    animationFrameRef.current = requestAnimationFrame(animate);
-    return () => {
-      if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current);
-      }
-    };
-  }, [animate]);
-
-  const updatePosition = useCallback((clientX: number, clientY: number) => {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    mousePosRef.current.x = clientX - rect.left;
-    mousePosRef.current.y = clientY - rect.top;
-  }, []);
-
-  // Mouse events
-  const handleMouseMove = useCallback((e: React.MouseEvent) => {
-    updatePosition(e.clientX, e.clientY);
-  }, [updatePosition]);
-
-  const handleMouseEnter = useCallback(() => {
-    isHoveringRef.current = true;
-  }, []);
-
-  const handleMouseLeave = useCallback(() => {
-    isHoveringRef.current = false;
-  }, []);
-
-  // Touch events for mobile
-  const handleTouchStart = useCallback((e: React.TouchEvent) => {
-    if (e.touches.length > 0) {
-      isHoveringRef.current = true;
-      updatePosition(e.touches[0].clientX, e.touches[0].clientY);
-    }
-  }, [updatePosition]);
-
-  const handleTouchMove = useCallback((e: React.TouchEvent) => {
-    if (e.touches.length > 0) {
-      updatePosition(e.touches[0].clientX, e.touches[0].clientY);
-    }
-  }, [updatePosition]);
-
-  const handleTouchEnd = useCallback(() => {
-    isHoveringRef.current = false;
-  }, []);
+    // Reset animation state
+    setTimeout(() => {
+      setIsAnimating(false);
+    }, 600);
+  }, [isAnimating]);
 
   return (
     <div className="flex flex-col gap-6 animate-fade-in">
@@ -107,40 +47,69 @@ const Hero: React.FC = () => {
         <div className="w-full sm:w-48 shrink-0 flex flex-col gap-4">
           <div
             ref={containerRef}
-            className="relative border p-1 border-zinc-400 bg-white dark:border-zinc-800 dark:bg-zinc-900/50 overflow-hidden cursor-none touch-none"
-            onMouseMove={handleMouseMove}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            onTouchEnd={handleTouchEnd}
+            className="relative border p-1 border-zinc-400 bg-white dark:border-zinc-800 dark:bg-zinc-900/50 overflow-hidden cursor-pointer group"
+            onClick={handleClick}
           >
             {/* Image wrapper */}
             <div className="relative w-full aspect-square overflow-hidden">
-              {/* Base grayscale image */}
+              {/* First image (grayscale - shown by default) */}
               <img
                 src={BIO.avatar}
                 alt="Profile"
-                className="w-full h-full object-cover grayscale"
+                className="absolute inset-0 w-full h-full object-cover grayscale transition-all duration-500 ease-out"
                 draggable={false}
+                style={{
+                  opacity: showSecondImage ? 0 : 1,
+                  transform: showSecondImage ? 'scale(1.1)' : 'scale(1)',
+                  filter: showSecondImage ? 'grayscale(100%) blur(4px)' : 'grayscale(100%) blur(0px)',
+                }}
               />
 
-              {/* new-header.png overlay with clip-path reveal */}
+              {/* Second image (revealed on click) */}
               <img
-                ref={overlayRef}
                 src="/new-header.png"
                 alt="Profile Reveal"
-                className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-                style={{ clipPath: 'circle(0px at 50% 50%)' }}
+                className="absolute inset-0 w-full h-full object-cover transition-all duration-500 ease-out"
                 draggable={false}
+                style={{
+                  opacity: showSecondImage ? 1 : 0,
+                  transform: showSecondImage ? 'scale(1)' : 'scale(0.95)',
+                  filter: showSecondImage ? 'blur(0px)' : 'blur(4px)',
+                }}
               />
 
-              {/* Custom cursor dot */}
+              {/* Clean swipe/wipe transition overlay */}
               <div
-                ref={cursorRef}
-                className="absolute pointer-events-none w-2 h-2 rounded-full bg-white mix-blend-difference"
-                style={{ opacity: 0 }}
+                className="absolute inset-0 pointer-events-none transition-transform duration-500 ease-out"
+                style={{
+                  background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.95) 45%, rgba(255,255,255,0.95) 55%, transparent 100%)',
+                  transform: isAnimating
+                    ? 'translateX(0%)'
+                    : (showSecondImage ? 'translateX(150%)' : 'translateX(-150%)'),
+                }}
               />
+
+              {/* Subtle sparkle during transition */}
+              {isAnimating && (
+                <div className="absolute inset-0 pointer-events-none">
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      background: 'radial-gradient(circle at 50% 50%, rgba(255,255,255,0.4) 0%, transparent 50%)',
+                      animation: 'pulse 0.3s ease-out',
+                    }}
+                  />
+                </div>
+              )}
+
+              {/* Click hint overlay */}
+              <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/10 transition-all duration-300">
+                <div className="bg-black/70 backdrop-blur-sm px-3 py-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform group-hover:scale-100 scale-95">
+                  <span className="text-white text-[10px] font-mono uppercase tracking-wider">
+                    {showSecondImage ? 'Click to go back' : 'Click to reveal'}
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
 
