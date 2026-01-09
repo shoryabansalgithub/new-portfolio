@@ -59,9 +59,15 @@ const Projects: React.FC<ProjectsProps> = ({ onViewAll }) => {
             >
               <div>
                 <div className="flex items-center justify-between mb-2">
-                  <h4 className="text-lg font-bold group-hover:underline decoration-1 underline-offset-4 transition-all duration-300 text-zinc-800 decoration-zinc-400 dark:text-zinc-200 dark:decoration-zinc-500">
+                  <a
+                    href={project.link || project.github || '#'}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-lg font-bold group-hover:underline decoration-1 underline-offset-4 transition-all duration-300 text-zinc-800 decoration-zinc-400 dark:text-zinc-200 dark:decoration-zinc-500 hover:text-zinc-900 dark:hover:text-white"
+                    onClick={(e) => e.stopPropagation()}
+                  >
                     {project.title}
-                  </h4>
+                  </a>
                 </div>
 
                 <p className="text-sm font-sans leading-relaxed mb-3 h-16 line-clamp-3 transition-colors duration-300 text-zinc-600 dark:text-zinc-400">
