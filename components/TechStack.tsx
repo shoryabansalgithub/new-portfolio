@@ -9,9 +9,9 @@ const TechStack: React.FC = () => {
         <p className="mb-2 uppercase text-[10px] text-zinc-500 dark:text-zinc-600">For Hire, Skilled In:</p>
         <ul className="list-none space-y-1">
           {TECH_STACK.map((tech) => (
-            <li key={tech.name} className="flex items-center justify-between border-b border-dashed py-1 transition-colors duration-300 border-zinc-300 dark:border-zinc-800/50">
+            <li key={tech.name} className="flex items-center gap-2 border-b border-dashed py-1 transition-colors duration-300 border-zinc-300 dark:border-zinc-800/50">
+              {tech.icon}
               <span>{tech.name}</span>
-              <span className="text-[10px] text-zinc-400 dark:text-zinc-600">[EXP]</span>
             </li>
           ))}
         </ul>
