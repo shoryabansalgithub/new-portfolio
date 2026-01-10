@@ -16,7 +16,6 @@ function App() {
   const currentDate = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
   const [darkMode, setDarkMode] = useState(false);
   const [currentPage, setCurrentPage] = useState<'home' | 'projects' | 'components'>('home');
-  const [isAnimating, setIsAnimating] = useState(false);
 
   // Initialize theme
   useEffect(() => {
@@ -25,23 +24,13 @@ function App() {
   }, []);
 
   const toggleTheme = () => {
-    setIsAnimating(true);
-
-    // Quick fade - flip theme at 200ms
-    setTimeout(() => {
-      const newMode = !darkMode;
-      setDarkMode(newMode);
-      if (newMode) {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-      }
-    }, 200);
-
-    // Remove animation overlay after 400ms total
-    setTimeout(() => {
-      setIsAnimating(false);
-    }, 400);
+    const newMode = !darkMode;
+    setDarkMode(newMode);
+    if (newMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
   };
 
   // Component Showcase Page
@@ -50,10 +39,12 @@ function App() {
       <div className={`min-h-screen w-full transition-colors duration-300 ${darkMode ? 'bg-paper-dark text-zinc-200 selection:bg-zinc-800' : 'bg-paper text-zinc-800 selection:bg-zinc-300 selection:text-black'}`}>
         <button
           onClick={toggleTheme}
-          className={`fixed top-4 right-4 sm:top-6 sm:right-6 p-2 rounded-full border transition-colors z-20 ${darkMode ? 'border-zinc-800 text-zinc-400 hover:text-white bg-paper-dark' : 'border-zinc-400 text-zinc-600 hover:text-black hover:border-black bg-paper'}`}
+          className={`fixed top-4 right-4 sm:top-6 sm:right-6 p-2.5 rounded-full border transition-all duration-300 z-20 ${darkMode ? 'border-zinc-700 text-zinc-400 hover:text-white hover:border-zinc-500 hover:shadow-lg hover:shadow-zinc-900/20 bg-paper-dark' : 'border-zinc-300 text-zinc-600 hover:text-black hover:border-zinc-400 hover:shadow-lg hover:shadow-zinc-400/20 bg-paper'}`}
           aria-label="Toggle Theme"
         >
-          {darkMode ? <SunIcon className="w-4 h-4" /> : <MoonIcon className="w-4 h-4" />}
+          <div className="w-4 h-4 transition-transform duration-300 hover:rotate-12">
+            {darkMode ? <SunIcon className="w-4 h-4" /> : <MoonIcon className="w-4 h-4" />}
+          </div>
         </button>
         <button
           onClick={() => setCurrentPage('home')}
@@ -72,10 +63,12 @@ function App() {
       <div className={`min-h-screen w-full transition-colors duration-300 ${darkMode ? 'bg-paper-dark text-zinc-200 selection:bg-zinc-800' : 'bg-paper text-zinc-800 selection:bg-zinc-300 selection:text-black'}`}>
         <button
           onClick={toggleTheme}
-          className={`fixed top-4 right-4 sm:top-6 sm:right-6 p-2 rounded-full border transition-colors z-20 ${darkMode ? 'border-zinc-800 text-zinc-400 hover:text-white bg-paper-dark' : 'border-zinc-400 text-zinc-600 hover:text-black hover:border-black bg-paper'}`}
+          className={`fixed top-4 right-4 sm:top-6 sm:right-6 p-2.5 rounded-full border transition-all duration-300 z-20 ${darkMode ? 'border-zinc-700 text-zinc-400 hover:text-white hover:border-zinc-500 hover:shadow-lg hover:shadow-zinc-900/20 bg-paper-dark' : 'border-zinc-300 text-zinc-600 hover:text-black hover:border-zinc-400 hover:shadow-lg hover:shadow-zinc-400/20 bg-paper'}`}
           aria-label="Toggle Theme"
         >
-          {darkMode ? <SunIcon className="w-4 h-4" /> : <MoonIcon className="w-4 h-4" />}
+          <div className="w-4 h-4 transition-transform duration-300 hover:rotate-12">
+            {darkMode ? <SunIcon className="w-4 h-4" /> : <MoonIcon className="w-4 h-4" />}
+          </div>
         </button>
         <AllProjects onBack={() => setCurrentPage('home')} />
       </div>
@@ -85,16 +78,7 @@ function App() {
   return (
     <div className={`min-h-screen w-full flex justify-center transition-colors duration-300 ${darkMode ? 'bg-paper-dark text-zinc-200 selection:bg-zinc-800' : 'bg-paper text-zinc-800 selection:bg-zinc-300 selection:text-black'}`}>
 
-      {/* Smooth Theme Transition Overlay */}
-      <div
-        className={`fixed inset-0 z-[9999] pointer-events-none transition-opacity duration-200 ease-out ${isAnimating ? 'opacity-100' : 'opacity-0'
-          }`}
-        style={{
-          background: darkMode
-            ? 'radial-gradient(circle at center, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.6) 100%)'
-            : 'radial-gradient(circle at center, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.8) 100%)',
-        }}
-      />
+
 
       <div className={`w-full max-w-[900px] border-x min-h-screen relative z-10 flex flex-col transition-colors duration-300 ${darkMode ? 'border-zinc-800 bg-paper-dark' : 'border-zinc-300 bg-paper'}`}>
 
@@ -103,10 +87,12 @@ function App() {
 
           <button
             onClick={toggleTheme}
-            className={`absolute top-4 right-4 sm:top-6 sm:right-6 p-2 rounded-full border transition-colors z-20 ${darkMode ? 'border-zinc-800 text-zinc-400 hover:text-white' : 'border-zinc-400 text-zinc-600 hover:text-black hover:border-black'}`}
+            className={`absolute top-4 right-4 sm:top-6 sm:right-6 p-2.5 rounded-full border transition-all duration-300 z-20 group ${darkMode ? 'border-zinc-700 text-zinc-400 hover:text-white hover:border-zinc-500 hover:shadow-lg hover:shadow-zinc-900/20' : 'border-zinc-300 text-zinc-600 hover:text-black hover:border-zinc-400 hover:shadow-lg hover:shadow-zinc-400/20'}`}
             aria-label="Toggle Theme"
           >
-            {darkMode ? <SunIcon className="w-4 h-4" /> : <MoonIcon className="w-4 h-4" />}
+            <div className="w-4 h-4 transition-transform duration-300 group-hover:rotate-12">
+              {darkMode ? <SunIcon className="w-4 h-4" /> : <MoonIcon className="w-4 h-4" />}
+            </div>
           </button>
 
           {/* Vol / Date Bar - Full Width Border */}
